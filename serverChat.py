@@ -35,7 +35,7 @@ def receive():
         print('Server is running and listening...')
         client, address = server.accept()
         print(f"Connection established with {str(address)}")
-        client.sent('alias?'.encode('utf-8'))
+        client.send('alias?'.encode('utf-8'))
         alias = client.recv(1024)
         aliases.append(alias)
         clients.append(client)
