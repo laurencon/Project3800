@@ -3,7 +3,7 @@ import threading
 
 alias = input('Choose an alias >>> ')
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(('127.0.0.1', 3306))
+client.connect(('127.0.0.1', 59000))
 
 def client_receive(): 
     while True:
