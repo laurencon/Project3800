@@ -1,11 +1,21 @@
 import socket
 import threading
+import mysql.connector
+
 
 host = '127.0.0.1'
-port = 59000
+port = 3306
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host,port))
 server.listen()
+connection = mysql.connector.connect(
+    host = "chatproject.cfe4xydjdmfh.us-east-1.rds.amazonaws.com",
+    user = "root",
+    password = "cs3800pass",
+    database = "chatproject"
+)
+cursor = connection.cursor()
+
 clients = []
 aliases = []
 
@@ -65,3 +75,5 @@ def send_chat_history(client, cursor):
 
 if __name__ == '__main__':
     receive()
+    cursor.close()
+    connection.close()
