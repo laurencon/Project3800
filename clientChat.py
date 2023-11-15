@@ -13,16 +13,24 @@ def client_receive():
                 client.send(alias.encode('utf-8'))
             else:
                 print(message)
-        except:
-            print('Error!')
+        except Exception as e:
+            print(f'Error: {e}')
             client.close()
             break
-        
+
 def client_send():
     while True:
-        message = f'{alias}: {input("")}'
-        client.send(message.encode('utf-8'))
-        
+        try:
+            message = input(f'{alias}: ')
+            if message.lower() == "<exit>":
+                client.send(message.encode('utf-8'))
+                break
+            client.send(f'{alias}: {message}'.encode('utf-8'))
+        except Exception as e:
+            print(f'Error: {e}')
+            client.close()
+            break
+
 receive_thread = threading.Thread(target=client_receive)
 receive_thread.start()
 
