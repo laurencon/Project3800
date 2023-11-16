@@ -1,35 +1,32 @@
 import socket
 import threading
 
-alias = input('Choose an alias >>> ')
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(('127.0.0.1', 59000))
-
-def client_receive(): 
+def client_receive():
     while True:
         try:
             message = client.recv(1024).decode('utf-8')
-            if message == "alias?":
-                client.send(alias.encode('utf-8'))
-            else:
-                print(message)
+            print(message, end='')  # Use 'end=' to avoid printing a new line after each message
         except Exception as e:
             print(f'Error: {e}')
-            client.close()
             break
 
 def client_send():
     while True:
         try:
-            message = input(f'{alias}: ')
+            message = input()
             if message.lower() == "<exit>":
                 client.send(message.encode('utf-8'))
                 break
-            client.send(f'{alias}: {message}'.encode('utf-8'))
+            client.send(message.encode('utf-8'))
         except Exception as e:
             print(f'Error: {e}')
-            client.close()
             break
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('127.0.0.1', 59000))
+
+alias = input('Enter your alias: ')
+client.send(alias.encode('utf-8'))
 
 receive_thread = threading.Thread(target=client_receive)
 receive_thread.start()
