@@ -6,6 +6,7 @@ def client_receive():
         try:
             message = client.recv(1024).decode('utf-8')
             print(message)
+            print(message, end='')  # Use 'end=' to avoid printing a new line after each message
         except Exception as e:
             print(f'Error: {e}')
             break
@@ -35,6 +36,8 @@ while True:
     else:
         print(response)
         break
+alias = input('Enter your alias: ')
+client.send(alias.encode('utf-8'))
 
 receive_thread = threading.Thread(target=client_receive)
 receive_thread.start()
