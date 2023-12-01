@@ -23,9 +23,13 @@
 }
 
 .join-btn {
-    flex: 1;
+    width: 100%;
+    padding: 10px;
     background-color: #3498db;
     color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .join-btn:hover {
