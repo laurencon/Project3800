@@ -15,14 +15,7 @@
 }
 
 /* Styling for the join button */
-.join {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-}
-
-.join-btn {
+.join .join-btn {
     width: 100%;
     padding: 10px;
     background-color: #3498db;
@@ -32,9 +25,22 @@
     cursor: pointer;
 }
 
-.join-btn:hover {
+.join .join-btn:hover {
     background-color: #2980b9;
 }
+
+.join {
+    display: flex;
+    flex-direction: column; /* Assuming vertical alignment */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the input field */
+.join input {
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
 
 /* Styling for the create button */
 .create-btn {
