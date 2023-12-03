@@ -45,8 +45,10 @@
     };
 
     socketio.on("message", (data) => {
-        createMessage(data.name, data.message);
+        const originalMessage = data.original_message || "left the room";
+        createMessage(data.name, originalMessage);
     });
+    
 
     const sendMessage = () => {
         const message = document.getElementById("message");
@@ -60,11 +62,13 @@
             sendMessage();
         }
     };
+
+    
 </script>
 
 {% for msg in messages %}
     <script type="text/javascript">
-        createMessage("{{msg.name}}", "{{msg.message}}");
+        createMessage("{{msg.name}}", "{{msg.original_message}}");
     </script>
 {% endfor %}
 {% endblock %}
